@@ -67,14 +67,14 @@ String matching is a simple matching of two strings and taking all matched show 
 
 Sentiment Analysis: After preprocessing the data, we have done sentiment analysis of the tweets. Sentiment analysis is a process by which we try to analyse the underlying emotion of the text posted by the user. Users tweets have been analyzed using two methods as shown in the diagram,
 
-![](Image/8.PNG)
+![](Image/9.PNG)
 
 The text blob sentiment method has two components (Polarity, Subjectivity). It is an NLP process, which analyse the text data and assign scores to rate it positive or negative sentiment. The polarity value lies between -1 and +1, where polarity of -1 means negative sentiment and that of 1 means positive sentiment. Subjectivity checks if the text data is a public or factual statement. Subjectivity score lies between [0,1], where higher
 value means public opinion and lower value means factual statement. We have not considered this score for our recommendation system since we must take in account two scores for deciding the sentiment and subjectivity. The other method is VADER (Valence Aware Dictionary and Sentiment Reasoner) sentiment analysis which is a dictionary-based approach that maps each word with it’s emotion by building a lexicon. In this process, the subjectivity of the text data is handled by the sentiment process itself. This sentiment analysis has four components i.e. positive, negative, neutral, and compound score. Compound score value is between [-1,1], -1 means least preferred and +1 means most preferred. For VADER sentiment if the compound score is greater or equal to 0.05 then text data sentiment is positive and if the compound score is less than or equal to -0.05 then it’s a negative sentiment, it’s a neutral sentiment if the sentiment score is neither of the above. For our recommendation system, we used VADER Sentiment score for the model data.
 
 Model Building: We have chosen deep learning for building the model. Before building the model, we have normalized our data and prepared it for feeding to themodel.
 
-![](Image/9.PNG)
+![](Image/10.PNG)
 
 After preprocessing and sentiment analysis, we have scaled, encoded, and discretized the data into 3 classes to remove data fluctuations. After fine tuning thedata, we have built a deep learning model for the proposed recommendation system.
 
