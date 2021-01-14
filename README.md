@@ -16,19 +16,27 @@ Our project idea is to build a recommendation system based on twitter data. Ther
 * DATA AND MAPPING SHOW NAMES
 
 We extracted twitter data with a goal of collecting tweets which is related to Netflix shows. To get a sensible data from twitter and collect the Netflix show names from tweets, we used different search keywords such as “best comedy Netflix”, “best action Netflix”, “best thriller Netflix” etc.
+
+![](Image/1.PNG)
+
 The data gathered from the twitter looks like below,
 
-<img src="Image/1.PNG" width="100" > 
-
+![](Image/2.PNG)
 
 As we did not acquire significant number of tweets with this, we collected tweets by giving show names as keywords as shown below,
+
+![](Image/3.PNG)
 
 Our next step was to clean the tweets and extract show names from them after which we can get the sentiment score for each tweet. To extract titles/shows, we used regex to extract words which are within quotes, starts with Capital letter and hashtags as we could see most tweets had show names mentioned in these formats. Once such words were extracted, for show mapping we used string matching and fuzzy methods. We did a full string matching where we could get an exact match between extracted words and actual show titles (Collected from Kaggle dataset). For words which did not pass an exact match test, we did a partial string-matching using Fuzzy string match. Fuzzy logic outputs a value (Lower the score, higher the match) based on how close two strings are. After trying few threshold values, we set a threshold score of 10 with which we got most similar matches and mapped actual show titles with score < 10 and selected only those extracted titles/shows.
 
 Since we have used two methods for show extraction, we did not exclude any potential good data but fuzzy string matching which is a partial matching method, there are chances that the tweets can be unrelated to the matched names for few cases. We included such data so that we will have adequate amount of data to perform rest of the project and most importantly build a deep learning model.
 
 As far as the subjectivity of the tweets are concerned, after processing the data using NLP, filtering it using Regex and cleaning it, we removed bad data, but we could not eliminate all bad data from our dataset. We had to compromise the subjectivity and include such data since we are predicting sentiment of the user item interaction which is mainly based on user’s reaction towards a certain topic.
+
 One example of the tweets with show title has shown below,
+
+![](Image/4.PNG)
+
 The text column is showing actual tweet on twitter posted by user_id 202480252. Since the text data has Netflix keyword and movie word, we have extracted the show name using Regex and fuzzy logic. In this case we know that the user is talking about the movie ‘Hush’. Here, the user is talking about the movie subject only as we extracted the tweets using keywords such as Netflix or movies.
 
 Another example, a tweet:
