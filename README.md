@@ -45,4 +45,45 @@ Another example, a tweet:
 Here, we can see that there is no clear subjectivity as the data collected by matching a list of show names. But our project simply considered it as a tweet about the show and sentiment analysis was performed, because our main idea was to build a recommendation system based on sentiment score.
 Overall, we tried to build a Netflix show recommender system for twitter users who express their interest about shows through tweets. Since there are above mentioned inconsistencies(partial string matching) involved in the data, as NLP is a vast field, we believe this could be improved by collecting tweets which are more specific about shows. Since Twitter contains many user specific unstructured data, we believe that the veracity of this time series data extracted from tweets can be further analyzed to get better accuracy which we considered as future scope.
 
+* Proposed Approach
+
+In this project, the applied techniques for building the recommendation system using social media has the below five approaches,
+ Problem Statement: In this project, we have analyzed and identified a common problem that we see for any ecommerce website. Most of the recommendation system is based on user’s implicit feedback i.e. ratings, comments, and view details. But social media platforms are becoming very popular nowadays and helping ecommerce domains to know customer behavior and their taste in order to sell products or to suggest items. We have chosen social media (Twitter) analysis for our project to build a Netflix recommendation system.
+This recommender system uses social media data to recommend movies or shows on Netflix which is based on user’s sentiment. Based on our analysis with social media user data, we further characterize the problem and establish the requirement of the Netflix recommender system. Finally, our goal is to recommend movie or shows on Netflix based on Twitter user data and it’s interaction with Netflix items (shows/movie) through tweets.
+
+![](Image/5.PNG)
+
+Data Gathering: In this step, we check the design of recommendation system then produce prototype for the recommendation system and gather data based on our requirement. From the previous step, we can tell that our project is based on social media data (text data only), so we have chosen Twitter platform as it is very popular and has various user data with variety of real-time data. We have written a python code using tweepy module which helps to connect to the twitter services. We have used Rest API for data collection. The total data collected is around 160k (40k for each genre). Our python code is making a connection to Twitter API and loading the data directly into MongoDB. The output is a top level json array which consists of the below variables. We have categorized the data into 4 genres (action, horror, comedy, and romance).
+Example of json array variable names in the MongoDB document,
+
+![](Image/6.PNG)
+
+Preprocessing: In our proposed approach, we have used text data from twitter. Since text data is unstructured, we have cleaned the data and removed all uninformative data from thedataset.
+
+![](Image/7.PNG)
+
+This is the diagram of our preprocessing method. We have cleaned the tweets by removing stop words, special characters, punctuations, web links and repeating words. These are typically the noise in the text data which we do not require in our data analysis. After cleaning the data, we extracted the Netflix show names from tweets. To match the tweeted Movie or show names with the actual Netflix show names, we have applied two methods a. String Matching, b. Levenshtein Fuzzy Logic.
+String matching is a simple matching of two strings and taking all matched show names into a dataframe. Levenshtein fuzzy logic is a similarity matching method which compares two words based on the distance between them. Levenshtein distance is measured by the minimum number of edits required to change one string into the other one to match both the strings. After matching using both the logic, we have used that original show and movie lists as our model input data for the proposed recommendation system.
+
+Sentiment Analysis: After preprocessing the data, we have done sentiment analysis of the tweets. Sentiment analysis is a process by which we try to analyse the underlying emotion of the text posted by the user. Users tweets have been analyzed using two methods as shown in the diagram,
+
+![](Image/8.PNG)
+
+The text blob sentiment method has two components (Polarity, Subjectivity). It is an NLP process, which analyse the text data and assign scores to rate it positive or negative sentiment. The polarity value lies between -1 and +1, where polarity of -1 means negative sentiment and that of 1 means positive sentiment. Subjectivity checks if the text data is a public or factual statement. Subjectivity score lies between [0,1], where higher
+value means public opinion and lower value means factual statement. We have not considered this score for our recommendation system since we must take in account two scores for deciding the sentiment and subjectivity. The other method is VADER (Valence Aware Dictionary and Sentiment Reasoner) sentiment analysis which is a dictionary-based approach that maps each word with it’s emotion by building a lexicon. In this process, the subjectivity of the text data is handled by the sentiment process itself. This sentiment analysis has four components i.e. positive, negative, neutral, and compound score. Compound score value is between [-1,1], -1 means least preferred and +1 means most preferred. For VADER sentiment if the compound score is greater or equal to 0.05 then text data sentiment is positive and if the compound score is less than or equal to -0.05 then it’s a negative sentiment, it’s a neutral sentiment if the sentiment score is neither of the above. For our recommendation system, we used VADER Sentiment score for the model data.
+
+Model Building: We have chosen deep learning for building the model. Before building the model, we have normalized our data and prepared it for feeding to themodel.
+
+![](Image/9.PNG)
+
+After preprocessing and sentiment analysis, we have scaled, encoded, and discretized the data into 3 classes to remove data fluctuations. After fine tuning thedata, we have built a deep learning model for the proposed recommendation system.
+
+In this step, we are trying to predict the sentiment score for twitter users which is a regression framework, where the target value is sentiment score, and dependent variables are user ids, show ids, ratings. We used neural collaborative filtering technique with two models for Netflix show/Movie recommendations-
+a. Single layer neural network Model
+
+![](Image/13.PNG)
+
+b. Multi-layer perceptron Model.
+
+![](Image/14.PNG)
 
