@@ -18,7 +18,7 @@ Our project idea is to build a recommendation system based on twitter data. Ther
 We extracted twitter data with a goal of collecting tweets which is related to Netflix shows. To get a sensible data from twitter and collect the Netflix show names from tweets, we used different search keywords such as “best comedy Netflix”, “best action Netflix”, “best thriller Netflix” etc.
 The data gathered from the twitter looks like below,
 
-![](Images/1.png)
+![](Image/1.PNG)
 
 
 As we did not acquire significant number of tweets with this, we collected tweets by giving show names as keywords as shown below,
