@@ -79,6 +79,7 @@ Model Building: We have chosen deep learning for building the model. Before buil
 After preprocessing and sentiment analysis, we have scaled, encoded, and discretized the data into 3 classes to remove data fluctuations. After fine tuning thedata, we have built a deep learning model for the proposed recommendation system.
 
 In this step, we are trying to predict the sentiment score for twitter users which is a regression framework, where the target value is sentiment score, and dependent variables are user ids, show ids, ratings. We used neural collaborative filtering technique with two models for Netflix show/Movie recommendations-
+
 a. Single layer neural network Model
 
 ![](Image/13.PNG)
